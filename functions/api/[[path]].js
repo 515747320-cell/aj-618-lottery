@@ -31,7 +31,8 @@ function verifyAdminToken(token, adminPwd) {
 }
 
 function getToken(req) {
-  return req.headers.get('x-admin-token') || '';
+  const url = new URL(req.url);
+  return req.headers.get('x-admin-token') || url.searchParams.get('token') || '';
 }
 
 function isAdmin(req, adminPwd) {
