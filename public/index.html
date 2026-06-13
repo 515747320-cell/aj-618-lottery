@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>澳洁洗衣618超值洗护节 - 幸运大抽奖</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="bg-layer"></div>
+    <div class="radiating-rays"></div>
+    <div class="bubbles-container" id="bubblesContainer"></div>
+    
+    <div class="container">
+        <header class="header">
+            <div class="logo-wrapper">
+                <h1 class="brand-name">澳洁洗衣</h1>
+                <p class="brand-slogan">衣物洗护 选澳洁 · 大品牌实体店 · 放心</p>
+            </div>
+        </header>
+        
+        <section class="hero-section">
+            <div class="title-3d">
+                <span class="title-618">618</span>
+                <span class="title-sub">超值洗护节</span>
+            </div>
+            <h2 class="lottery-title">幸运大抽奖</h2>
+            <p class="lottery-desc">填写信息即可参与抽奖，100%中奖！</p>
+        </section>
+        
+        <!-- 信息填写表单 -->
+        <section class="form-section" id="formSection">
+            <div class="form-card">
+                <h3>填写抽奖信息</h3>
+                <div class="form-group">
+                    <label>姓名</label>
+                    <input type="text" id="userName" placeholder="请输入您的姓名" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label>手机号</label>
+                    <input type="tel" id="userPhone" placeholder="请输入手机号" maxlength="11">
+                </div>
+                <button id="submitInfoBtn" class="submit-btn">确认参与抽奖</button>
+            </div>
+        </section>
+        
+        <!-- 奖品展示区 -->
+        <section class="prizes-section" id="prizesSection" style="display:none;">
+            <div class="prize-card prize-1">
+                <div class="prize-icon">🏆</div>
+                <div class="prize-info">
+                    <h3>一等奖</h3>
+                    <p>免费洗衣卡</p>
+                    <span class="prize-value">价值200元</span>
+                </div>
+            </div>
+            <div class="prize-card prize-2">
+                <div class="prize-icon">🎫</div>
+                <div class="prize-info">
+                    <h3>二等奖</h3>
+                    <p>洗衣优惠券</p>
+                    <span class="prize-value">10元</span>
+                </div>
+            </div>
+            <div class="prize-card prize-3">
+                <div class="prize-icon">🎟️</div>
+                <div class="prize-info">
+                    <h3>三等奖</h3>
+                    <p>洗衣优惠券</p>
+                    <span class="prize-value">5元</span>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 抽奖按钮 -->
+        <section class="draw-section" id="drawSection" style="display:none;">
+            <button id="drawBtn" class="draw-button">
+                <span class="btn-text">立即抽奖</span>
+                <span class="btn-shine"></span>
+            </button>
+        </section>
+        
+        <footer class="footer">
+            <p>活动时间：2026年6月1日 - 6月20日</p>
+            <p>专业洗衣26年 · 全国12000+门店</p>
+        </footer>
+    </div>
+    
+    <!-- 中奖弹窗 -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="congrats-text">🎉 恭喜您 🎉</div>
+            </div>
+            <div class="modal-body">
+                <div class="user-info-display">
+                    <span id="winnerName"></span> 您好！
+                </div>
+                <div class="prize-display">
+                    <div class="prize-level-badge" id="prizeLevelBadge">一等奖</div>
+                    <div class="prize-name" id="prizeName">免费洗衣卡（价值200元）</div>
+                </div>
+                <div class="prize-qr">
+                    <p>请截图保存此页面</p>
+                    <p>到门店出示即可使用</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeModal" class="close-button">知道了</button>
+            </div>
+        </div>
+    </div>
+    
+    <canvas id="confettiCanvas"></canvas>
+    <script src="js/lottery.js"></script>
+</body>
+</html>
