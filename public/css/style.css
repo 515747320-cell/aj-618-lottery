@@ -442,6 +442,12 @@ body {
     margin: 5px 0;
 }
 
+.footer-consult {
+    font-size: 13px !important;
+    color: rgba(255, 215, 0, 0.9) !important;
+    font-weight: bold;
+}
+
 .modal {
     display: none;
     position: fixed;
