@@ -347,6 +347,15 @@ body {
     margin: 30px 0;
 }
 
+.consult-text {
+    font-size: 16px;
+    color: rgba(255, 215, 0, 0.95);
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
 .draw-button {
     position: relative;
     width: 200px;
