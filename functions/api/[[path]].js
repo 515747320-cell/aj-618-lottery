@@ -51,7 +51,7 @@ export async function onRequest(ctx) {
       
       return j({ success: true, prize: { level: prize.level, name: prize.name }, message: `恭喜 ${name} 获得${prize.name}！` });
     } catch (e) {
-      return j({ success: false, message: '系统繁忙' }, 500);
+      return j({ success: false, message: '系统繁忙: ' + (e.message || e).toString().substring(0, 200) }, 500);
     }
   }
 
