@@ -58,17 +58,26 @@ export async function onRequest(ctx) {
   if (path === '/api/draw' && method === 'POST') {
     try {
       const { name = '', phone = '' } = await request.json();
-      if (phone) {
-        const { data: e } = await supabase.from('lottery_records').select('id').eq('phone', phone).limit(1);
-        if (e?.length) return j({ success: false, message: '该手机号已参与过抽奖' });
-      }
+      if (!phone) return j({ success: false, message: '请输入手机号' });
+      
       const prize = draw();
-      const { data } = await supabase.from('lottery_records').insert({
+      const { data, error } = await supabase.from('lottery_records').insert({
         name, phone, ip_address: request.headers.get('x-forwarded-for') || '',
         prize_level: prize.level, prize_name: prize.name,
       }).select('id').single();
+      
+      if (error) {
+        if (error.message?.includes('unique') || error.code === '23505') {
+          return j({ success: false, message: '该手机号已参与过抽奖，每人仅限一次' });
+        }
+        throw error;
+      }
+      
       return j({ success: true, recordId: data?.id, prize: { level: prize.level, name: prize.name }, message: `恭喜 ${name} 获得${prize.name}！` });
-    } catch (e) { return j({ success: false, message: '抽奖失败' }, 500); }
+    } catch (e) { 
+      console.error('Draw error:', e);
+      return j({ success: false, message: '抽奖失败' }, 500); 
+    }
   }
 
   // Stats (public)
