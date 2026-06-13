@@ -16,9 +16,9 @@ const ADMIN_PASSWORD = 'aojie618admin';
 const adminTokens = new Set();
 
 const PRIZES = {
-    1: { name: '一等奖 - 免费洗衣卡（价值200元）', level: 1, weight: 10 },
-    2: { name: '二等奖 - 10元洗衣优惠券', level: 2, weight: 10 },
-    3: { name: '三等奖 - 5元洗衣优惠券', level: 3, weight: 80 }
+    1: { name: '一等奖 - 免费洗1双鞋', level: 1, weight: 10 },
+    2: { name: '二等奖 - 10元现金优惠', level: 2, weight: 10 },
+    3: { name: '三等奖 - 5元复购券', level: 3, weight: 80 }
 };
 const TOTAL_WEIGHT = Object.values(PRIZES).reduce((s, p) => s + p.weight, 0);
 

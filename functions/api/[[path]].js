@@ -1,9 +1,9 @@
 import { createClient } from '@supabase/supabase-js';
 
 const PRIZES = {
-  1: { name: '一等奖 - 免费洗衣卡（价值200元）', level: 1, weight: 10 },
-  2: { name: '二等奖 - 10元洗衣优惠券', level: 2, weight: 10 },
-  3: { name: '三等奖 - 5元洗衣优惠券', level: 3, weight: 80 }
+  1: { name: '一等奖 - 免费洗1双鞋', level: 1, weight: 10 },
+  2: { name: '二等奖 - 10元现金优惠', level: 2, weight: 10 },
+  3: { name: '三等奖 - 5元复购券', level: 3, weight: 80 }
 };
 const TOTAL = 100;
 function draw() { let r = Math.random() * TOTAL, c = 0; for (const p of Object.values(PRIZES)) { c += p.weight; if (r < c) return p; } return PRIZES[3]; }
