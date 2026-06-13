@@ -11,23 +11,22 @@ function draw() { let r = Math.random() * TOTAL, c = 0; for (const p of Object.v
 const adminTokens = new Set();
 const TOKEN_SECRET = 'aojie-618-secret-2026';
 
-// 生成管理token（无需内存存储）
-function makeAdminToken() {
-  const data = `${Date.now()}:aojie618admin`;
+// 生成管理token
+function makeAdminToken(pwd) {
+  const data = `${Date.now()}:${pwd}`;
   return btoa(data);
 }
 
 // 验证管理token
-function verifyAdminToken(token) {
+function verifyAdminToken(token, adminPwd) {
   try {
     const decoded = atob(token);
     const parts = decoded.split(':');
     if (parts.length !== 2) return false;
     const timestamp = parseInt(parts[0]);
     const pwd = parts[1];
-    // token 24小时内有效
     if (Date.now() - timestamp > 86400000) return false;
-    return pwd === ADMIN_PASSWORD;
+    return pwd === adminPwd;
   } catch { return false; }
 }
 
@@ -35,8 +34,8 @@ function getToken(req) {
   return req.headers.get('x-admin-token') || '';
 }
 
-function isAdmin(req) {
-  return verifyAdminToken(getToken(req));
+function isAdmin(req, adminPwd) {
+  return verifyAdminToken(getToken(req), adminPwd);
 }
 
 const cors = { 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Methods': 'GET,POST,OPTIONS', 'Access-Control-Allow-Headers': 'Content-Type,x-admin-token' };
@@ -88,14 +87,14 @@ export async function onRequest(ctx) {
     try {
       const { password } = await request.json();
       if (password === ADMIN_PASSWORD) {
-        return j({ success: true, token: makeAdminToken() });
+        return j({ success: true, token: makeAdminToken(ADMIN_PASSWORD) });
       }
       return j({ success: false, message: '密码错误' }, 401);
     } catch (e) { return j({ success: false, message: '登录失败' }, 500); }
   }
 
   // Admin guard
-  const checkAdmin = () => isAdmin(request);
+  const checkAdmin = () => isAdmin(request, ADMIN_PASSWORD);
 
   // Admin stats
   if (path === '/api/admin/stats' && method === 'GET') {
